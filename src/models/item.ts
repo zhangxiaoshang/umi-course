@@ -1,7 +1,12 @@
 import { Effect, Reducer, Subscription, request } from 'umi';
 
 export interface ItemProps {
-  item_id: string;
+  item_id: number;
+  item_name: string;
+  item_type: number;
+  price: number;
+  total_price: number;
+  des1: string;
 }
 export interface ItemModelState {
   items: ItemProps[];

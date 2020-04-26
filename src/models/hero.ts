@@ -38,16 +38,7 @@ const HeroModel: HeroModelType = {
   effects: {
     *query({ payload }, { call, put }) {},
     *fetch({ type, payload }, { put, call, select }) {
-      const data = yield request('/herodetails.json', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({
-          ename: 110,
-        }),
-      });
+      const data = yield request('/web201605/js/herolist.json');
       const localData = [
         {
           ename: 105,
