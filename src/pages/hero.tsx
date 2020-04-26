@@ -10,7 +10,7 @@ interface PageProps extends ConnectProps {
 const Hero: FC<PageProps> = props => {
   return (
     <div>
-      <h1 className="styles.title">Page hero</h1>
+      <h1 className={styles.title}>Page hero</h1>
       <h2>This is {JSON.stringify(props.hero)}</h2>
     </div>
   );
