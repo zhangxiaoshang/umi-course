@@ -10,6 +10,7 @@ export interface ItemProps {
 }
 export interface ItemModelState {
   items: ItemProps[];
+  filterKey: number;
 }
 export interface ItemModelType {
   namespace: 'item';
@@ -28,6 +29,7 @@ const ItemModel: ItemModelType = {
 
   state: {
     items: [],
+    filterKey: 0,
   },
 
   effects: {
