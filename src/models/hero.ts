@@ -1,4 +1,21 @@
 import { Effect, Reducer, Subscription, request } from 'umi';
+import herolist from '../../mock/herolist.json';
+
+const getRandomArrayElements = (arr: any[], count: number) => {
+  const shuffled = arr.slice(0);
+  let i = arr.length;
+  let min = i - count;
+  let temp, index;
+
+  while (i-- > min) {
+    index = Math.floor((i + 1) * Math.random());
+    temp = shuffled[index];
+    shuffled[index] = shuffled[i];
+    shuffled[i] = temp;
+  }
+
+  return shuffled.slice(min);
+};
 
 export interface HeroProps {
   ename: number;
@@ -44,7 +61,8 @@ const HeroModel: HeroModelType = {
   effects: {
     *query({ payload }, { call, put }) {},
     *fetch({ type, payload }, { put, call, select }) {
-      const data = yield request('/web201605/js/herolist.json');
+      // const data = yield request('/web201605/js/herolist.json');
+      const data = herolist;
       const localData = [
         {
           ename: 105,
@@ -64,14 +82,7 @@ const HeroModel: HeroModelType = {
         },
       ];
 
-      const freeheros = yield request('mock/freeheros.json', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({ number: 10 }),
-      });
+      const freeheros = getRandomArrayElements(herolist, 13);
       yield put({
         type: 'save',
         payload: {
