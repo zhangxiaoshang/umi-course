@@ -2,13 +2,14 @@ import React, { FC } from 'react';
 import styles from './hero.less';
 import { connect, HeroModelState, ConnectProps } from 'umi';
 import { Row, Col, Radio, Card } from 'antd';
+import FreeHeroItem from '@/components/FreeHeroItem';
 
 interface PageProps extends ConnectProps {
   hero: HeroModelState;
 }
 
 const Hero: FC<PageProps> = ({ hero, dispatch }) => {
-  const { heros = [], filterKey = 0 } = hero;
+  const { heros = [], filterKey = 0, freeheros = [], itemHover = 0 } = hero;
 
   const heroType = [
     { key: 0, value: '全部' },
@@ -29,8 +30,38 @@ const Hero: FC<PageProps> = ({ hero, dispatch }) => {
     });
   };
 
+  const onItemHover = (e: number) => {
+    dispatch({
+      type: 'hero/save',
+      payload: {
+        itemHover: e,
+      },
+    });
+  };
+
   return (
     <div>
+      <div className={styles.normal}>
+        <div className={styles.info}>
+          <Row className={styles.freehero}>
+            <Col span={24}>
+              <p>周免英雄</p>
+              <div>
+                {freeheros.map((data, index) => (
+                  <FreeHeroItem
+                    data={data}
+                    itemHover={itemHover}
+                    onItemHover={onItemHover}
+                    thisIndex={index}
+                    key={index}
+                  ></FreeHeroItem>
+                ))}
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
+
       <Card>
         <Radio.Group onChange={onChange} value={filterKey}>
           {heroType.map(item => (
