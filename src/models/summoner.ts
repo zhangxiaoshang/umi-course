@@ -53,7 +53,7 @@ const SummonerModel: SummonerModelType = {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
+      return history.listen(({ pathname }) => {
         if (pathname === '/summoner') {
           dispatch({
             type: 'fetch',

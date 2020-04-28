@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { Link } from 'umi';
+import { Link, Redirect } from 'umi';
 import styles from './index.less';
 
 const { Header, Content, Footer } = Layout;
@@ -10,11 +10,18 @@ const menuData = [
   { route: '/summoner', name: '召唤师技能' },
 ];
 
-function BasicLayout(props) {
+interface Props {
+  location: { pathname: string };
+  children: React.ReactNode;
+}
+
+function BasicLayout(props: Props) {
   const {
     location: { pathname },
     children,
   } = props;
+
+  if (pathname === '/') return <Redirect to={'/hero'} />;
 
   return (
     <Layout>

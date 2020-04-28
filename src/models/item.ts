@@ -55,7 +55,7 @@ const ItemModel: ItemModelType = {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
+      return history.listen(({ pathname }) => {
         if (pathname === '/item') {
           dispatch({
             type: 'fetch',

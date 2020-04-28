@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import styles from './hero.less';
-import { connect, HeroModelState, ConnectProps } from 'umi';
+import { connect, Dispatch, HeroModelState, ConnectProps } from 'umi';
 import { Row, Col, Radio, Card } from 'antd';
+import { RadioChangeEvent } from 'antd/es/radio';
 import FreeHeroItem from '@/components/FreeHeroItem';
 
 interface PageProps extends ConnectProps {
   hero: HeroModelState;
+  dispatch: Dispatch;
 }
 
 const Hero: FC<PageProps> = ({ hero, dispatch }) => {
@@ -21,7 +23,7 @@ const Hero: FC<PageProps> = ({ hero, dispatch }) => {
     { key: 6, value: '辅助' },
   ];
 
-  const onChange = e => {
+  const onChange = (e: RadioChangeEvent) => {
     dispatch({
       type: 'hero/save',
       payload: {

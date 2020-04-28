@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import styles from './item.less';
-import { connect, ItemModelState, ConnectProps } from 'umi';
+import { connect, Dispatch, ItemModelState, ConnectProps } from 'umi';
 import { Row, Col, Card, Radio } from 'antd';
+import { RadioChangeEvent } from 'antd/es/radio';
 
 interface PageProps extends ConnectProps {
   item: ItemModelState;
+  dispatch: Dispatch;
 }
 
 const Item: FC<PageProps> = ({ item, dispatch }) => {
@@ -19,7 +21,7 @@ const Item: FC<PageProps> = ({ item, dispatch }) => {
     { key: 7, value: '辅助' },
   ];
 
-  const onChange = e => {
+  const onChange = (e: RadioChangeEvent) => {
     dispatch({
       type: 'item/save',
       payload: {
